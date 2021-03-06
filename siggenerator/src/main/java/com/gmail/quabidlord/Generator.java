@@ -41,17 +41,11 @@ public class Generator {
         }
     }
 
-    /**
-     * 
-     * @param pathToFileDataToGenerateSignatureFrom
-     * @param keyGeneratingAlgorithm
-     * @param provider
-     * @param destinationPathForSignature
-     * @param destinationPathForPublicKey
-     * @param destinationPathForPrivateKey
-     * @throws FileNotFoundException
-     * @throws IOException
-     */
+   /**
+    * 
+    * @param pathToFileDataToGenerateSignatureFrom
+    * @param provider
+    */
     public final void generate(String pathToFileDataToGenerateSignatureFrom, String provider) {
         KeyPairGenerator keyGenerator = null;
         SecureRandom random = null;
