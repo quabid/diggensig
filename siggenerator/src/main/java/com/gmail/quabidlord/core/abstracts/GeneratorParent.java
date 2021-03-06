@@ -96,7 +96,7 @@ public abstract class GeneratorParent {
                         // sign the data.
 
                         // Get a Signature Object: The following gets a Signature object for generating
-                        // or verifying signatures using the DSA algorithm,
+                        // or verifying signatures using a valid algorithm,
                         signature = Signature.getInstance(typeOfAlgorithm, provider.toUpperCase());
 
                         // Initialize the Signature Object
