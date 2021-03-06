@@ -34,10 +34,15 @@ public class App {
      */
     final static Generator generator = new Generator();
 
+    
     /**
+     * 
      * @param pathToThePublicKey
      * @param pathToTheSignatureFile
      * @param pathToTheDataFile
+     * @param signatureAlgorithm
+     * @param provider
+     * @param dsaAlgorithm
      */
     final static Verifier verifier = new Verifier();
 

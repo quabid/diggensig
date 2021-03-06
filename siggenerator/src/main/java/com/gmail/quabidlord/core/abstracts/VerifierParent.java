@@ -26,12 +26,8 @@ public abstract class VerifierParent {
         super();
     }
 
-    /**
-     * @param pathToThePublicKey
-     * @param pathToTheSignatureFile
-     * @param pathToTheDataFile
-     */
-    public final void verify(String pathToThePublicKey, String pathToTheSignatureFile, String pathToTheDataFile) {
+    public final void verify(String pathToThePublicKey, String pathToTheSignatureFile, String pathToTheDataFile,
+            String signatureAlgorithm, String provider, String dsaAlgorithm) {
         if (!pathValidator.pathExists(pathToThePublicKey)) {
             print("\n\t\tPublic Key " + pathToThePublicKey + " does not exist!\n");
             return;
@@ -55,7 +51,7 @@ public abstract class VerifierParent {
             X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(encKey);
 
             // Now you need a KeyFactory object to do the conversion.
-            KeyFactory keyFactory = KeyFactory.getInstance("DSA", "SUN");
+            KeyFactory keyFactory = KeyFactory.getInstance(signatureAlgorithm, provider);
 
             // Finally, you can use the KeyFactory object to generate a PublicKey from the
             // key specification.
@@ -71,7 +67,7 @@ public abstract class VerifierParent {
 
             // You can now proceed to do the verification.
             // Initialize the Signature Object for Verification
-            Signature signature = Signature.getInstance("SHA1withDSA", "SUN");
+            Signature signature = Signature.getInstance(dsaAlgorithm, provider);
 
             // Next, you need to initialize the Signature object. The initialization method
             // for verification requires the public key.
