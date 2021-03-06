@@ -21,7 +21,7 @@ public class App {
     static String dataFile = "/home/quabid/bin/tooct";
     static String signatureAlgorithm = "DSA";
     static String provider = "SUN";
-    static String dsaAlgorithm = "SHA1withDSA";
+    static String typeOfAlgorithm = "SHA1withDSA";
     static int keySize = 1024;
 
     /**
@@ -32,7 +32,7 @@ public class App {
      * @param pathToSaveThePrivateKeyFile
      * @param provider
      * @param signatureAlgorithm
-     * @param dsaAlgorithm
+     * @param typeOfAlgorithm
      * @param keySize
      */
     final static Generator generator = new Generator();
@@ -44,7 +44,7 @@ public class App {
      * @param pathToTheDataFile
      * @param signatureAlgorithm
      * @param provider
-     * @param dsaAlgorithm
+     * @param typeOfAlgorithm
      */
     final static Verifier verifier = new Verifier();
 
@@ -54,7 +54,7 @@ public class App {
             print(String.format(
                     "\n\tThis program is expecting the following arguments:\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
                     "dataFile", "pathToSaveTheSignatureFile", "pathToSaveThePublicKeyFile",
-                    "pathToSaveThePrivateKeyFile", "provider", "signatureAlgorithm", "dsaAlgorithm", "keySize"));
+                    "pathToSaveThePrivateKeyFile", "provider", "signatureAlgorithm", "typeOfAlgorithm", "keySize"));
             usage();
         } else {
             dataFile = args[0];
@@ -63,14 +63,14 @@ public class App {
             pathToSaveThePrivateKeyFile = args[3];
             provider = args[4];
             signatureAlgorithm = args[5];
-            dsaAlgorithm = args[6];
+            typeOfAlgorithm = args[6];
             keySize = Integer.parseInt(args[7]);
 
             generator.generate(dataFile, pathToSaveTheSignatureFile, pathToSaveThePublicKeyFile,
-                    pathToSaveThePrivateKeyFile, provider, signatureAlgorithm, dsaAlgorithm, keySize);
+                    pathToSaveThePrivateKeyFile, provider, signatureAlgorithm, typeOfAlgorithm, keySize);
 
             verifier.verify(pathToSaveThePublicKeyFile, pathToSaveTheSignatureFile, dataFile, signatureAlgorithm,
-                    provider, dsaAlgorithm);
+                    provider, typeOfAlgorithm);
 
             if (!pathValidator.pathExists(args[1]) || !pathValidator.pathExists(args[2])
                     || !pathValidator.pathExists(args[3])) {

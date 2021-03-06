@@ -47,12 +47,12 @@ public abstract class GeneratorParent {
      * @param pathToSaveThePrivateKeyFile
      * @param provider
      * @param signatureAlgorithm
-     * @param dsaAlgorithm
+     * @param typeOfAlgorithm
      * @param keySize
      */
     public final void generate(String pathToFileDataToGenerateSignatureFrom, String pathToSaveTheSignatureFile,
             String pathToSaveThePublicKeyFile, String pathToSaveThePrivateKeyFile, String provider,
-            String signatureAlgorithm, String dsaAlgorithm, int keySize) {
+            String signatureAlgorithm, String typeOfAlgorithm, int keySize) {
         KeyPairGenerator keyGenerator = null;
         SecureRandom random = null;
         Signature signature = null;
@@ -97,7 +97,7 @@ public abstract class GeneratorParent {
 
                         // Get a Signature Object: The following gets a Signature object for generating
                         // or verifying signatures using the DSA algorithm,
-                        signature = Signature.getInstance(dsaAlgorithm, provider.toUpperCase());
+                        signature = Signature.getInstance(typeOfAlgorithm, provider.toUpperCase());
 
                         // Initialize the Signature Object
                         // Before a Signature object can be used for signing or verifying, it must be
