@@ -95,7 +95,7 @@ public class Verifier {
 
             // Verify the Signature
             boolean verifies = signature.verify(sigToVerify);
-            print("signature verifies: " + verifies);
+            print("\n\tsignature verifies: " + verifies + "!\n");
         } catch (NoSuchAlgorithmException nsae) {
             nsae.printStackTrace();
             return;
