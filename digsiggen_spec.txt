@@ -1,0 +1,24 @@
+Digital Signature Generator and Verifier
+
+Generator Class
+    - Single Method: access public
+        - generate
+            - generate: keyPairGenerator
+                @param String filePathToGenerateTheSignature
+                @param String keyGeneratorAlgorithm
+                    - DiffieHellman (1024)
+                    - DSA (1024)
+                    - RSA (1024, 2048)
+                    - EC
+                @param String provider
+                    - SUN
+                @param String destinationPathForSignature
+                @param String destinationPathForPublicKey
+                @param String destinationPathForPrivateKey
+
+    - Helper Methods: access private
+        - writePrivateKeyToFile: writes the private key to file
+        - writePublicKeyToFile: writes the public key to file
+        - saveSignatureToFile: writes the Signature to file
+        - listProviders: prints to console current providers on the system
+        - print: prints String value to console
