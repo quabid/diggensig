@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
-import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.Signature;
 
@@ -30,7 +29,7 @@ public class GeneratorTests {
 
                 KeyPair pair = keyGen.generateKeyPair();
                 PrivateKey priv = pair.getPrivate();
-                PublicKey pub = pair.getPublic();
+                // PublicKey pub = pair.getPublic();
 
                 Signature dsa = Signature.getInstance("SHA1withDSA", "SUN");
 

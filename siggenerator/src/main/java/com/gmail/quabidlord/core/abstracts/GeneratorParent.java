@@ -21,7 +21,6 @@ import java.security.SignatureException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.gmail.quabidlord.pathmanager.MyConstants;
 import com.gmail.quabidlord.pathmanager.PathValidator;
 
 public abstract class GeneratorParent {
@@ -30,7 +29,6 @@ public abstract class GeneratorParent {
 
     private final PrintStream printer = new PrintStream(System.out);
     private final PathValidator pathValidator = new PathValidator();
-    private final MyConstants constants = new MyConstants();
 
     public GeneratorParent() {
         if (Security.getProviders().length > 0) {
@@ -138,26 +136,33 @@ public abstract class GeneratorParent {
                         FileOutputStream fosPriKey = new FileOutputStream(pathToSaveThePrivateKeyFile);
                         fosPriKey.write(priKey);
                         fosPriKey.close();
-
-                        print("\n\tSignature, Private and Public Keys successfully written to files!!\n");
+                        success = true;
                     } catch (NoSuchProviderException nspe) {
+                        success = false;
                         nspe.printStackTrace();
                         return;
                     } catch (NoSuchAlgorithmException nsae) {
+                        success = false;
                         nsae.printStackTrace();
                         return;
                     } catch (InvalidKeyException ike) {
+                        success = false;
                         ike.printStackTrace();
                         return;
                     } catch (FileNotFoundException fnfe) {
+                        success = false;
                         fnfe.printStackTrace();
                         return;
                     } catch (IOException ioe) {
+                        success = false;
                         ioe.printStackTrace();
                         return;
                     } catch (SignatureException se) {
+                        success = false;
                         se.printStackTrace();
                         return;
+                    } finally {
+                        status();
                     }
                 }
             } else {
@@ -186,7 +191,9 @@ public abstract class GeneratorParent {
     }
 
     private final void status() {
-        String status = success ? "\n\tPrivate, Public and Signature files successful!" : "Program failed, Big Time!!";
+        String msg = "\n\tSignature, Private and Public Keys successfully written to files!!\n";
+
+        String status = success ? msg : "Program failed, Big Time!!";
         print(status);
         return;
     }

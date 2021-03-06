@@ -15,12 +15,10 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 
 import com.gmail.quabidlord.pathmanager.core.PathValidator;
-import com.gmail.quabidlord.pathmanager.core.constants.MyConstants;
 
 public abstract class VerifierParent {
     private final PrintStream printer = new PrintStream(System.out);
     private final PathValidator pathValidator = new PathValidator();
-    private final MyConstants constants = new MyConstants();
 
     public VerifierParent() {
         super();
