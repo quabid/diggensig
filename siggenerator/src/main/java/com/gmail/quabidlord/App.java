@@ -86,5 +86,6 @@ public class App {
 
     final static void usage() {
         print("\n\tExample Usage: java -jar digsiggen.jar ~/bin/tohex $HOME/sig $HOME/pub $HOME/pri SUN DSA SHA1withDSA 1024\n");
+        print("\n\tExample Usage: java -jar digsiggen.jar ~/bin/tohex $HOME/sig $HOME/pub $HOME/pri SUN DSA SHA256withDSA 2048\n");
     }
 }
