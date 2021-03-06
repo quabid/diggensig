@@ -5,21 +5,22 @@ import java.io.PrintStream;
 import com.gmail.quabidlord.pathmanager.MyConstants;
 
 /**
- * Hello world!
+ * java -jar digsiggen.jar ~/bin/tohex "$HOME/sig" "$HOME/pub" "$HOME/pri" "SUN"
+ * "DSA" "SHA1withDSA" "1024"
  *
  */
 public class App {
     final static PrintStream printer = new PrintStream(System.out);
     static String[] providers;
     final static MyConstants constants = new MyConstants();
-    final static String pathToSaveTheSignatureFile = constants.USRHOME + "sig";
-    final static String pathToSaveThePublicKeyFile = constants.USRHOME + "pubKey";
-    final static String pathToSaveThePrivateKeyFile = constants.USRHOME + "privKey";
-    final static String dataFile = "/home/quabid/bin/tooct";
-    final static String signatureAlgorithm = "DSA";
-    final static String provider = "SUN";
-    final static String dsaAlgorithm = "SHA1withDSA";
-    final static int keySize = 1024;
+    static String pathToSaveTheSignatureFile = constants.USRHOME + "sig";
+    static String pathToSaveThePublicKeyFile = constants.USRHOME + "pubKey";
+    static String pathToSaveThePrivateKeyFile = constants.USRHOME + "privKey";
+    static String dataFile = "/home/quabid/bin/tooct";
+    static String signatureAlgorithm = "DSA";
+    static String provider = "SUN";
+    static String dsaAlgorithm = "SHA1withDSA";
+    static int keySize = 1024;
 
     /**
      * 
@@ -34,7 +35,6 @@ public class App {
      */
     final static Generator generator = new Generator();
 
-    
     /**
      * 
      * @param pathToThePublicKey
@@ -53,16 +53,31 @@ public class App {
                     "\n\tThis program is expecting the following arguments:\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
                     "dataFile", "pathToSaveTheSignatureFile", "pathToSaveThePublicKeyFile",
                     "pathToSaveThePrivateKeyFile", "provider", "signatureAlgorithm", "dsaAlgorithm", "keySize"));
+            usage();
         } else {
+            dataFile = args[0];
+            pathToSaveTheSignatureFile = args[1];
+            pathToSaveThePublicKeyFile = args[2];
+            pathToSaveThePrivateKeyFile = args[3];
+            provider = args[4];
+            signatureAlgorithm = args[5];
+            dsaAlgorithm = args[6];
+            keySize = Integer.parseInt(args[7]);
+
             generator.generate(dataFile, pathToSaveTheSignatureFile, pathToSaveThePublicKeyFile,
                     pathToSaveThePrivateKeyFile, provider, signatureAlgorithm, dsaAlgorithm, keySize);
 
-            verifier.verify(pathToSaveThePublicKeyFile, pathToSaveTheSignatureFile, dataFile);
+            verifier.verify(pathToSaveThePublicKeyFile, pathToSaveTheSignatureFile, dataFile, signatureAlgorithm,
+                    provider, dsaAlgorithm);
         }
 
     }
 
     final static void print(Object obj) {
         printer.println(String.valueOf(obj));
+    }
+
+    final static void usage() {
+        print("\n\tExample Usage: java -jar digsiggen.jar ~/bin/tohex $HOME/sig $HOME/pub $HOME/pri SUN DSA SHA1withDSA 1024\n");
     }
 }

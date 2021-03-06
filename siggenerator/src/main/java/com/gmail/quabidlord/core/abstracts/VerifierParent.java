@@ -26,6 +26,15 @@ public abstract class VerifierParent {
         super();
     }
 
+    /**
+     * 
+     * @param pathToThePublicKey
+     * @param pathToTheSignatureFile
+     * @param pathToTheDataFile
+     * @param signatureAlgorithm
+     * @param provider
+     * @param dsaAlgorithm
+     */
     public final void verify(String pathToThePublicKey, String pathToTheSignatureFile, String pathToTheDataFile,
             String signatureAlgorithm, String provider, String dsaAlgorithm) {
         if (!pathValidator.pathExists(pathToThePublicKey)) {
