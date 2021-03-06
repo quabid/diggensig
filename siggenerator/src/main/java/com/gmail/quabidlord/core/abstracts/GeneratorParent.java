@@ -140,6 +140,7 @@ public abstract class GeneratorParent {
                     } catch (NoSuchProviderException nspe) {
                         success = false;
                         nspe.printStackTrace();
+                        listProviders();
                         return;
                     } catch (NoSuchAlgorithmException nsae) {
                         success = false;
