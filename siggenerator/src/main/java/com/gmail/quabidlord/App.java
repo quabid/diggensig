@@ -3,6 +3,7 @@ package com.gmail.quabidlord;
 import java.io.PrintStream;
 
 import com.gmail.quabidlord.pathmanager.MyConstants;
+import com.gmail.quabidlord.pathmanager.PathValidator;
 
 /**
  * java -jar digsiggen.jar ~/bin/tohex "$HOME/sig" "$HOME/pub" "$HOME/pri" "SUN"
@@ -13,6 +14,7 @@ public class App {
     final static PrintStream printer = new PrintStream(System.out);
     static String[] providers;
     final static MyConstants constants = new MyConstants();
+    final static PathValidator pathValidator = new PathValidator();
     static String pathToSaveTheSignatureFile = constants.USRHOME + "sig";
     static String pathToSaveThePublicKeyFile = constants.USRHOME + "pubKey";
     static String pathToSaveThePrivateKeyFile = constants.USRHOME + "privKey";
@@ -69,6 +71,11 @@ public class App {
 
             verifier.verify(pathToSaveThePublicKeyFile, pathToSaveTheSignatureFile, dataFile, signatureAlgorithm,
                     provider, dsaAlgorithm);
+
+            if (!pathValidator.pathExists(args[1]) || !pathValidator.pathExists(args[2])
+                    || !pathValidator.pathExists(args[3])) {
+                usage();
+            }
         }
 
     }
