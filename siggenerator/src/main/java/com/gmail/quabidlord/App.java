@@ -28,7 +28,7 @@ public class App {
     static String pathToSaveTheSignatureFile = constants.USRHOME + "sig";
     static String pathToSaveThePublicKeyFile = constants.USRHOME + "pubKey";
     static String pathToSaveThePrivateKeyFile = constants.USRHOME + "privKey";
-    static String dataFile = "/home/quabid/bin/tooct";
+    static String dataFile = "$HOME/bin/tooct";
     static String signatureAlgorithm = "DSA";
     static String provider = "SUN";
     static String typeOfAlgorithm = "SHA1withDSA";
