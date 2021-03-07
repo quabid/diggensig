@@ -95,11 +95,18 @@ public class App {
 
     final static void usage() {
         print(String.format(
-                "\n\tThis program is expecting the following arguments:\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
+                "\n\tGenerate Signature:\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
                 "dataFile", "pathToSaveTheSignatureFile", "pathToSaveThePublicKeyFile", "pathToSaveThePrivateKeyFile",
                 "provider", "signatureAlgorithm", "typeOfAlgorithm", "keySize"));
         print("\n\tExample Usage: java -jar digsiggen.jar ~/bin/tohex $HOME/sig $HOME/pub $HOME/pri SUN DSA SHA1withDSA 1024\n");
         print("\n\tExample Usage: java -jar digsiggen.jar ~/bin/tohex $HOME/sig $HOME/pub $HOME/pri SUN DSA SHA256withDSA 2048\n");
+
+        print(String.format(
+                "\n\tVerify Signature:\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
+                "pathToSaveThePublicKeyFile", "pathToSaveTheSignatureFile", "dataFile", "signatureAlgorithm",
+                "provider", "typeOfAlgorithm"));
+        print("\n\tExample Usage: java -jar digsiggen.jar /home/quabid/publicKey /home/quabid/signature /home/quabid/bin/tohex DSA SUN SHA1withDSA\n");
+        print("\n\tExample Usage: java -jar digsiggen.jar /home/quabid/publicKey /home/quabid/signature /home/quabid/bin/tohex DSA SUN SHA256withDSA\n");
     }
 
     final static void status() {
