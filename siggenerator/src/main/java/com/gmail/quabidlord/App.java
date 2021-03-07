@@ -64,7 +64,7 @@ public class App {
             pathToSaveTheSignatureFile = args[1];
             pathToSaveThePublicKeyFile = args[2];
             pathToSaveThePrivateKeyFile = args[3];
-            provider = args[4];
+            provider = args[4].toUpperCase();
             signatureAlgorithm = args[5];
             typeOfAlgorithm = args[6];
             keySize = Integer.parseInt(args[7]);
@@ -80,7 +80,7 @@ public class App {
             pathToSaveTheSignatureFile = args[1];
             dataFile = args[2];
             signatureAlgorithm = args[3];
-            provider = args[4];
+            provider = args[4].toUpperCase();
             typeOfAlgorithm = args[5];
             verifier.verify(pathToSaveThePublicKeyFile, pathToSaveTheSignatureFile, dataFile, signatureAlgorithm,
                     provider, typeOfAlgorithm);
