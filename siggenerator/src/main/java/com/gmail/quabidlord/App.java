@@ -6,9 +6,19 @@ import com.gmail.quabidlord.pathmanager.MyConstants;
 import com.gmail.quabidlord.pathmanager.PathValidator;
 
 /**
- * java -jar digsiggen.jar ~/bin/tohex "$HOME/sig" "$HOME/pub" "$HOME/pri" "SUN"
- * "DSA" "SHA1withDSA" "1024"
+ * @implNote Generate Signature
+ * @implSpec java -jar digsiggen.jar ~/bin/tohex $HOME/sig $HOME/pub $HOME/pri
+ *           SUN DSA SHA1withDSA 1024
+ * 
+ * @implSpec java -jar digsiggen.jar ~/bin/tohex $HOME/sig $HOME/pub $HOME/pri
+ *           SUN DSA SHA256withDSA 2048
  *
+ * @implNote Verify Signature
+ * @implSpec java -jar digsiggen.jar /home/quabid/pub /home/quabid/sig
+ *           /home/quabid/bin/tohex DSA SUN SHA1withDSA
+ * 
+ * @implSpec java -jar digsiggen.jar /home/quabid/pub /home/quabid/sig
+ *           /home/quabid/bin/tohex DSA SUN SHA256withDSA
  */
 public class App {
     final static PrintStream printer = new PrintStream(System.out);
@@ -49,14 +59,7 @@ public class App {
     final static Verifier verifier = new Verifier();
 
     public static void main(String[] args) {
-
-        if (args.length != 8) {
-            print(String.format(
-                    "\n\tThis program is expecting the following arguments:\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
-                    "dataFile", "pathToSaveTheSignatureFile", "pathToSaveThePublicKeyFile",
-                    "pathToSaveThePrivateKeyFile", "provider", "signatureAlgorithm", "typeOfAlgorithm", "keySize"));
-            usage();
-        } else {
+        if (args.length == 8) {
             dataFile = args[0];
             pathToSaveTheSignatureFile = args[1];
             pathToSaveThePublicKeyFile = args[2];
@@ -72,12 +75,18 @@ public class App {
             verifier.verify(pathToSaveThePublicKeyFile, pathToSaveTheSignatureFile, dataFile, signatureAlgorithm,
                     provider, typeOfAlgorithm);
 
-            if (!pathValidator.pathExists(args[1]) || !pathValidator.pathExists(args[2])
-                    || !pathValidator.pathExists(args[3])) {
-                usage();
-            }
+        } else if (args.length == 6) {
+            pathToSaveThePublicKeyFile = args[0];
+            pathToSaveTheSignatureFile = args[1];
+            dataFile = args[2];
+            signatureAlgorithm = args[3];
+            provider = args[4];
+            typeOfAlgorithm = args[5];
+            verifier.verify(pathToSaveThePublicKeyFile, pathToSaveTheSignatureFile, dataFile, signatureAlgorithm,
+                    provider, typeOfAlgorithm);
+        } else {
+            usage();
         }
-
     }
 
     final static void print(Object obj) {
@@ -85,7 +94,15 @@ public class App {
     }
 
     final static void usage() {
+        print(String.format(
+                "\n\tThis program is expecting the following arguments:\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
+                "dataFile", "pathToSaveTheSignatureFile", "pathToSaveThePublicKeyFile", "pathToSaveThePrivateKeyFile",
+                "provider", "signatureAlgorithm", "typeOfAlgorithm", "keySize"));
         print("\n\tExample Usage: java -jar digsiggen.jar ~/bin/tohex $HOME/sig $HOME/pub $HOME/pri SUN DSA SHA1withDSA 1024\n");
         print("\n\tExample Usage: java -jar digsiggen.jar ~/bin/tohex $HOME/sig $HOME/pub $HOME/pri SUN DSA SHA256withDSA 2048\n");
+    }
+
+    final static void status() {
+        print("\n\tProgram executed successfully\n");
     }
 }
