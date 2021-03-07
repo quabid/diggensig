@@ -70,7 +70,7 @@ public abstract class GeneratorParent {
                     try {
                         // Create a Key Pair Generator
                         // The first step is to get a key-pair generator object for generating keys for
-                        // the DSA signature algorithm.
+                        // the signature algorithm e.g. DSA, RSA, DES
                         keyGenerator = KeyPairGenerator.getInstance(signatureAlgorithm, provider.toUpperCase());
 
                         // The source of randomness must be an instance of the SecureRandom class that
@@ -96,7 +96,7 @@ public abstract class GeneratorParent {
                         // sign the data.
 
                         // Get a Signature Object: The following gets a Signature object for generating
-                        // or verifying signatures using a valid algorithm,
+                        // or verifying signatures using a valid algorithm e.g. SHA256withDSA, SHA1withDSA
                         signature = Signature.getInstance(typeOfAlgorithm, provider.toUpperCase());
 
                         // Initialize the Signature Object
@@ -194,7 +194,7 @@ public abstract class GeneratorParent {
     private final void status() {
         String msg = "\n\tSignature, Private and Public Keys successfully written to files!!\n";
 
-        String status = success ? msg : "Program failed, Big Time!!";
+        String status = success == true ? msg : "Program failed, Big Time!!";
         print(status);
         return;
     }
